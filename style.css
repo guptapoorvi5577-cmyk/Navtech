@@ -1,0 +1,1581 @@
+html {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  display: block;
+  background: hwb(212 67% 2% / 0.819);
+  height: 100%;
+  overflow: hidden;
+  color: #1a044a;
+  height: 100vh;
+}
+
+.main {
+  height: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-frame {
+  margin-top: 25px;
+  background: #eee5e5;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  height: 100%;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.card,
+.sos-float {
+  transition: all 0.25s ease;
+}
+
+.content-view {
+  display: none !important;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+
+.content-view.active {
+  display: block !important;
+  flex-direction: column;
+}
+
+/* MAIN */
+
+/* === VIEW DISPLAY SAFETY === */
+#welcome-view.active,
+#route-view.active,
+#emergency-view.active {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* HEADER */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h1 {
+  font-size: 28px;
+}
+
+.topbar p {
+  color: #030011;
+}
+
+.sos-float {
+  background: #dc2626;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* STATUS CARD */
+.status-card {
+  background: white;
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.status-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status-info p {
+  font-size: 13px;
+  color: #4b5563;
+
+}
+
+.status-card {
+  border-left: 6px solid #22c55e;
+}
+
+
+
+.status-icon {
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 26px;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.progress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 5px;
+}
+
+.progress-bar.safe {
+  width: 92%;
+}
+
+.percent {
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+
+
+}
+
+/* ACTIONS */
+.actions {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+#btnRoute {
+  border-left: 5px solid #2563eb;
+}
+
+#btnSafety {
+  border-left: 5px solid #16a34a;
+}
+
+.emergency-call {
+  border-left: 5px solid #dc2626;
+}
+
+/* === BASE SOS BUTTON (authoritative, from old CSS) === */
+.sos-float {
+  background: #dc2626;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(220, 38, 38, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+
+.card p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.card.danger {
+  border: 2px solid #fecaca;
+}
+
+#safety-map-view.active {
+  flex-direction: row;
+}
+
+.card:hover {
+  background: #eef2ff;
+  color: #1e3a8a;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(30, 58, 138, 0.2);
+  transition: all 0.25s ease;
+}
+
+.card:hover p {
+  color: #fff;
+}
+
+.card.danger {
+  background: #fff5f5;
+  border: 2px solid #fecaca;
+}
+
+.card.danger:hover {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.sos-float:hover {
+  background: #f97316;
+  /* ORANGE */
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.9);
+  transition: all 0.25s ease;
+}
+
+.menu a:hover {
+  background: #f97316;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
+
+.text-lg {
+  font-size: 16px;
+}
+
+.text-warn {
+  color: #9a3412;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.lh-16 {
+  line-height: 1.6;
+}
+
+.map-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.map-actions button:hover {
+  background: #f97316;
+}
+
+.map-view {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+}
+
+.route-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 4000;
+  min-height: 40px;
+}
+
+.route-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.route-actions button:hover {
+  background: #f97316;
+}
+
+/* ===== SINGLE SOURCE: MAP + ROUTING ===== */
+
+#safety-map-view.active {
+  display: flex !important;
+  flex-direction: row;
+  gap: 12px;
+  height: 100%;
+}
+
+.map-left {
+  flex: 1;
+  height: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.map-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  position: relative;
+  overflow: visible;
+}
+
+#route-panel {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  overflow-y: auto;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 10px;
+  z-index: 1;
+  transition: opacity 0.25s ease;
+}
+
+#route-panel .leaflet-routing-container {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+#route-panel .leaflet-routing-container {
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.home-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.home-btn:hover {
+  background: #f97316;
+  color: white;
+  transform: scale(1.1);
+  border-color: #f97316;
+}
+
+#simulateRoute:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+#simulateRoute:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.title-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-icon {
+  width: 80px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 12px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.risk-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #374151;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(220, 38, 38, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+.sos-float {
+  animation: pulse 2.5s infinite;
+}
+
+.ai-status {
+  font-size: 12px;
+  background: #e0e7ff;
+  color: #1e3a8a;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+
+.sos-timer {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  background: #111827;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* OVERLAY */
+.sos-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.sos-modal {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  width: 280px;
+}
+
+.sos-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sos-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* === FIX SOS TIMER CLIPPING (SAFE) === */
+.sos-float {
+  position: relative;
+  overflow: visible;
+  z-index: 10000;
+}
+
+.topbar {
+  overflow: visible;
+}
+
+#sosIcon.urgent {
+  animation: pulse 1s infinite;
+}
+
+#settings-view {
+  overflow-y: auto;
+}
+
+.settings-header {
+  margin-bottom: 20px;
+}
+
+.settings-header h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+#settings-view.active {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.settings-header p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settings-group {
+  margin-bottom: 20px;
+}
+
+.login-banner:hover {
+  background: #ea580c;
+}
+
+.leaflet-control-container>.leaflet-routing-container {
+  display: none !important;
+}
+
+/* ===============================
+   SHARE LOCATION TOAST
+================================ */
+
+.share-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-left: 6px solid #8b5cf6;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 10001;
+  width: 320px;
+}
+
+.toast-content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.toast-icon {
+  font-size: 22px;
+}
+
+.toast-text h4 {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.toast-text p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Dark mode */
+body.dark-theme .share-toast {
+  background: #1e293b;
+  color: white;
+}
+
+/* ===============================
+   ADVANCED SETTINGS GRID
+================================ */
+
+.settings-grid-four {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.setting-item {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 110px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.setting-text span {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.setting-desc {
+  font-size: 10px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+@media (max-width: 1200px) {
+  .settings-grid-four {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-grid-four {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   EMERGENCY VIEW
+================================ */
+
+.emergency-container {
+  text-align: center;
+  padding: 20px;
+  background: #fffafa;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sos-pulse-large {
+  font-size: 60px;
+  background: #fee2e2;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(220, 38, 38, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+.status-list {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #fecaca;
+  margin: 20px 0;
+}
+
+.status-item {
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.status-item.pulse {
+  color: #2563eb;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.btn-confirm {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #9ca3af;
+  transition: 0.25s;
+  border-radius: 999px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+}
+
+.switch input:checked+.slider {
+  background-color: #2563eb;
+}
+
+.switch input:checked+.slider::before {
+  transform: translateX(18px);
+}
+
+.slider {
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================
+   CENTER + PREMIUM SIGN-IN BUTTON
+================================ */
+
+.login-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.login-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+  color: #ffffff;
+
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  transition: all 0.25s ease;
+}
+
+.login-banner:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.55);
+  background: linear-gradient(135deg, #4f46e5, #1d4ed8);
+}
+
+.card.share-strip:hover::before {
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.8);
+}
+
+.card.emergency-strip:hover::before {
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.8);
+}
+
+/* ===============================
+   LEFT COLOR STRIP (BASE)
+================================ */
+
+.card {
+  position: relative;
+}
+
+.card.share-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #8b5cf6;
+  border-radius: 14px 0 0 14px;
+}
+
+.card.emergency-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #dc2626;
+  border-radius: 14px 0 0 14px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card.share-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #8b5cf6;
+  border-radius: 14px 0 0 14px;
+}
+
+.card.emergency-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #dc2626;
+  border-radius: 14px 0 0 14px;
+}
+
+.card.share-strip:hover::before {
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.8);
+}
+
+.card.emergency-strip:hover::before {
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.8);
+}
+
+#alternateRoute:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.route-actions button:disabled:hover {
+  background: #9ca3af;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===============================
+   SIGN IN VIEW
+================================ */
+
+.signin-container {
+  max-width: 360px;
+  margin: auto;
+  margin-top: 10px;
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.signin-container h2 {
+  margin-bottom: 6px;
+}
+
+.signin-container p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signin-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+/* ===============================
+   SHARE LOCATION VIEW – PREMIUM UI
+================================ */
+
+.share-card {
+  max-width: 420px;
+  margin: auto;
+  margin-top: 30px;
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.share-back-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.share-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.live-badge {
+  background: #dc2626;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: #dc2626;
+  border-radius: 50%;
+  animation: pulse-red 1.5s infinite;
+}
+
+.share-info {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.share-details-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 13px;
+}
+
+.share-details-box a {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.share-details-box a:hover {
+  transform: scale(1.03);
+}
+
+/* ===============================
+   FIX: SHARE LOCATION CONTENT CUT
+================================ */
+
+#share-location-view.active {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  overflow-y: auto;        /* ✅ ENABLE SCROLL */
+  padding: 10px;
+}
+
+.share-card {
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 120px); /* ✅ prevent cut */
+  overflow-y: auto;                /* ✅ inner scroll */
+}
+
+.share-coordinates {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  font-size: 13px;
+}
+/* ===============================
+   SHARE LOCATION VIEW – PREMIUM UI
+================================ */
+
+.share-card {
+  max-width: 420px;
+  margin: auto;
+  margin-top: 30px;
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.share-back-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.share-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.live-badge {
+  background: #dc2626;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: #dc2626;
+  border-radius: 50%;
+  animation: pulse-red 1.5s infinite;
+}
+
+.share-info {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.share-details-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 13px;
+}
+
+.share-details-box a {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.share-details-box a:hover {
+  transform: scale(1.03);
+}
+/* ===============================
+   FIX: SHARE LOCATION CONTENT CUT
+================================ */
+
+#share-location-view.active {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  overflow-y: auto;        /* ✅ ENABLE SCROLL */
+  padding: 10px;
+}
+
+.share-card {
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 120px); /* ✅ prevent cut */
+  overflow-y: auto;                /* ✅ inner scroll */
+}
+.share-coordinates {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  font-size: 13px;
+}
+
+/* ===============================
+   SIGN IN VIEW – SCROLL FIX
+================================ */
+
+#signin-view.active {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden; /* prevent page scroll */
+}
+
+.signin-container {
+  max-height: 80vh;        /* ✅ fit screen */
+  overflow-y: auto;       /* ✅ enable scroll */
+  -webkit-overflow-scrolling: touch; /* smooth mobile scroll */
+}
+
+.signin-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.signin-container::-webkit-scrollbar-thumb {
+  background: #c7d2fe;
+  border-radius: 10px;
+}
+
+/* ===============================
+   HOME HERO – PREMIUM LANDING
+================================ */
+
+.home-hero {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #eef2ff, #ffffff);
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.hero-icon {
+  font-size: 54px;
+  background: #e0e7ff;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-card h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #1e3a8a;
+}
+
+.hero-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.stat {
+  background: white;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.hero-btn.primary {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  box-shadow: 0 10px 25px rgba(37,99,235,0.4);
+}
+
+.hero-btn.primary:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.hero-btn.outline {
+  background: white;
+  border: 1px solid #c7d2fe;
+  color: #2563eb;
+}
+
+.hero-btn.outline:hover {
+  background: #eef2ff;
+}
+
+.route-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+ /* ===============================
+   ALTERNATE ROUTE VIEW – UI FIX
+================================ */
+
+#route-view {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 18px;
+  height: 100%;
+}
+
+#route-view.active {
+  display: block !important;
+  overflow-y: auto;
+}
+
+/* Header inside alternate route div */
+.route-view-header {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.route-view-header h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.route-view-header p {
+  font-size: 13px;
+  color: #6b7280;
+}
+/* ===============================
+   ALTERNATE ROUTE CARDS
+================================ */
+
+.alt-route-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.alt-route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.alt-route-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.alt-route-score {
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.safe {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.medium {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.risky {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+/* ===============================
+   LOGIN PAGE – PREMIUM UI
+================================ */
+
+.login-body {
+  min-height: 100vh;
+  background: linear-gradient(135deg,hwb(212 67% 2% / 0.819));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.login-wrapper {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 32px 26px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 14px;
+}
+
+.login-card h2 {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.login-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+/* INPUTS */
+.signin-form input {
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.signin-form input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* BUTTON */
+.btn-primary {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.45);
+}
+
+.login-footer {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 400px) {
+  .login-card {
+    padding: 26px 20px;
+  }
+}
+
