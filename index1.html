@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+
+<head>
+  <meta charset="utf-8">
+  <title>Women Safety App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css">
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="title-block">
+        <img src="./icon.png" class="app-icon">
+        <div>
+          <h1>Good evening, <span id="userName">User</span></h1>
+          <p class="subtitle">
+            AI-powered safety monitoring active • Live risk analysis enabled
+          </p>
+
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button id="btnSettings" class="home-btn" title="Settings">⚙️</button>
+
+        <!-- AI STATUS INDICATOR -->
+        <span class="ai-status">🧠 AI Active</span>
+        <button id="btnHome" class="home-btn" title="Go Home">🏠</button>
+        <button class="sos-float" id="sosFloat">
+          <span class="sos-inner">
+            <span id="sosIcon">⚠</span>
+          </span>
+        </button>
+
+
+      </div>
+
+    </header>
+
+    <!-- STATUS CARD -->
+    <section class="status-card">
+      <div class="status-icon">🛡️</div>
+      <div class="status-info">
+        <h3>Area Risk: LOW</h3>
+        <p>
+          Financial District • AI Safety Score: <strong>76/100</strong><br>
+          Based on crime history & live signals
+        </p>
+
+        <div class="progress">
+          <div class="progress-bar safe"></div>
+        </div>
+      </div>
+      <span class="percent">76%</span>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <section class="actions">
+
+      <div class="card" id="btnRoute">
+        📍<br>
+        <strong>Safest Route</strong>
+        <p>AI-optimized path</p>
+      </div>
+
+      <div class="card" id="btnSafety">
+        🗺️<br>
+        <strong>Safety Map</strong>
+      </div>
+
+      <!-- SHARE LOCATION -->
+      <div class="card share-strip" id="btnShareLocation">
+        👥<br>
+        <strong>Share Location</strong>
+      </div>
+
+      <!-- EMERGENCY -->
+      <div class="card danger emergency-strip emergency-call">
+        🚨<br>
+        <strong>Emergency</strong>
+        <p>Tap to activate SOS</p>
+      </div>
+
+    </section>
+
+    <!-- CONTENT FRAME -->
+    <section class="content-frame">
+      <div id="settings-view" class="content-view">
+
+        <div class="settings-header">
+          <h2>Settings</h2>
+          <p>Customize your safety preferences</p>
+          <div class="login-center">
+            <button class="login-banner" id="openLogin">👤 Sign Out </button>
+          </div>
+
+
+
+        </div>
+
+
+        <div class="settings-group">
+          <h4>Advanced Safety Controls</h4>
+
+          <div class="settings-grid-four">
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>📍 Auto Check-in</span>
+                <p class="setting-desc">Check in at safe spots automatically</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>🕵️ Incognito Mode</span>
+                <p class="setting-desc">Hide activity from the network</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>🔔 Push Notifications</span>
+                <p class="setting-desc">Alerts for nearby incidents</p>
+              </div>
+              <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>💬 SMS Alerts</span>
+                <p class="setting-desc">Backup alerts via text message</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>🗣️ Voice Activation</span>
+                <p class="setting-desc">Say "Hey SafePath, I need help"</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <span>🌙 Night Mode Alerts</span>
+                <p class="setting-desc">Enhanced alerts during nighttime</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+
+            <div class="setting-item link-item">
+              <div class="setting-text">
+                <span>❓ Help Center</span>
+                <p class="setting-desc">FAQs and support resources</p>
+              </div>
+              <span class="chevron">➔</span>
+            </div>
+
+            <div class="setting-item link-item">
+              <div class="setting-text">
+                <span>📜 Privacy Policy</span>
+                <p class="setting-desc">How we protect your data</p>
+              </div>
+              <span class="chevron">➔</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+      </div>
+
+      <!-- 👋 DEFAULT WELCOME VIEW -->
+      <div id="welcome-view" class="content-view">
+        <h2>👋 Welcome to ROUTERAKSHA</h2>
+        <p>Your AI companion for safer travel.<br>
+          We continuously monitor risk and alert help if needed.
+        </p>
+
+
+
+
+
+      </div>
+
+      <div id="safety-map-view" class="content-view map-view">
+
+        <!-- LEFT: MAP -->
+        <div class="map-left">
+          <div id="map"></div>
+        </div>
+
+        <!-- RIGHT: INFO + BUTTONS -->
+        <div class="map-right">
+          <p class="mb-10">
+            🧠 AI Safety Analysis Active<br>
+            🔴 High-risk zones • 🟢 Safer paths<br>
+            🚓 Nearby help points highlighted
+          </p>
+
+          <div class="route-toggle">
+            <label class="switch">
+              <input type="checkbox" id="toggleInstructions" checked>
+              <span class="slider"></span>
+            </label>
+            <span>Route Instructions</span>
+          </div>
+
+          <div id="route-panel"></div>
+
+          <div class="map-actions route-actions">
+            <button id="simulateRoute" disabled>🧪 Simulate Route</button>
+            <button id="alternateRoute" style="display: none;">🔁 Alternate Route</button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- ROUTE PLANNER VIEW -->
+      <div id="route-view" class="content-view">
+        <h3>📍 Route Planner</h3>
+        <p>
+          Choose a destination to find the safest path.
+        </p>
+      </div>
+      <!-- SHARE LOCATION VIEW -->
+      <div id="share-location-view" class="content-view">
+
+        <div class="share-card">
+
+          <button id="backFromShare" class="share-back-btn">← Back</button>
+
+          <div class="share-header">
+            <div class="pulse-dot"></div>
+            <h3 id="share-title">Live Location Sharing</h3>
+            <span class="live-badge">LIVE</span>
+          </div>
+
+          <p class="share-info">
+            Your real-time location is securely shared with your emergency contacts.
+          </p>
+
+          <div id="share-content" class="share-details-box"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- EMERGENCY VIEW -->
+      <div id="emergency-view" class="content-view">
+        <div class="emergency-container">
+          <div class="sos-pulse-large">🚨</div>
+
+          <h2 class="emergency-title">SOS Mode Activated</h2>
+
+          <div id="sos-countdown-box">
+            <p>Notify contacts and authorities in</p>
+            <div id="sosTime">5</div>
+          </div>
+
+          <div id="sos-status-list" class="status-list" style="display:none;">
+            <div class="status-item done">✅ Emergency contacts notified</div>
+            <div class="status-item done">📍 Live location shared</div>
+            <div class="status-item pulse">🚓 Dispatching nearest Police unit...</div>
+            <div class="dispatch-eta">
+              Estimated Response: <b>4–7 mins</b>
+            </div>
+          </div>
+
+          <div class="emergency-actions">
+            <button id="confirmSOS" class="btn-confirm">Confirm</button>
+            <button id="cancelSOS" class="btn-cancel">Cancel (Mistake)</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </section>
+
+  </main>
+
+  <!-- SOS TIMER OVERLAY -->
+  <div id="sos-overlay" style="display:none;" class="sos-overlay">
+    <div class="sos-modal">
+      <h2>⚠ Safety Check</h2>
+      <p>No response detected.</p>
+
+      <div class="sos-actions">
+        <button id="imSafeBtn">✅ I’m Safe</button>
+        <button id="goBackBtn">🔙 Go Back</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./app.js"></script>
+
+  <div id="share-notification" class="share-toast" style="display:none;">
+    <div class="toast-content">
+      <span class="toast-icon">📍</span>
+      <div class="toast-text">
+        <h4 id="toast-title">Location Shared</h4>
+        <p id="share-details">Live tracking is now active.</p>
+      </div>
+      <button class="toast-close" onclick="this.parentElement.parentElement.style.display='none'">
+        ✕
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+</body>
+
+</html>
