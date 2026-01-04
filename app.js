@@ -162,7 +162,7 @@ toggle?.addEventListener("change", () => {
 document.getElementById("openLogin")?.addEventListener("click", () => {
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("safePathUserName");
-  window.location.replace("login.html");
+  window.location.replace("index.html");
 });
 
 
